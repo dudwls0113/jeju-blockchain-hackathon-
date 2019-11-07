@@ -2,10 +2,12 @@ package com.hackthon.jejuhackathon.src;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.hackthon.jejuhackathon.R;
+import com.hackthon.jejuhackathon.src.main.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -21,6 +23,8 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
                 finish();
             }
         }, 2000);
