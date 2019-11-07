@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">노량진밥도둑</string>
+    <string name="app_name">SafeMe</string>
     <string name="loading">로딩중입니다.</string>
     <string name="network_error">네트워크 연결이 원활하지 않습니다.</string>
+
+    <string name="school_certification_permission">권한요청에 동의 해주셔야 이용 가능합니다. 설정에서 권한 허용 하시기 바랍니다</string>
+    <string name="school_certification_image_error">이미지 처리 오류입니다. 다시 시도해주세요.</string>
+
 </resources>
