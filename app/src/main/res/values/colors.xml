@@ -3,4 +3,9 @@
     <color name="colorPrimary">#f7b500</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="splashBackgroundColor">#000000</color>
+    <color name="splashTextColor">#f7b500</color>
+
+    <color name="moneyTextColor">#848484</color>
 </resources>
