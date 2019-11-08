@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
@@ -13,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.hackthon.jejuhackathon.R;
 import com.hackthon.jejuhackathon.src.BaseActivity;
 import com.hackthon.jejuhackathon.src.InsuActivity;
+import com.hackthon.jejuhackathon.src.MapActivity;
 import com.hackthon.jejuhackathon.src.VideoActivity;
 
 
@@ -21,7 +25,12 @@ public class MainActivity extends BaseActivity {
     DrawerLayout mDrawerLayout;
     View mDrawerView;
 
+    RadioButton mNoInsuRadio, mBasicInsuRadio, mPremiumInsuRadio;
+
+    TextView mBtnGoToRide;
+
     boolean isHamburgerOpen = false;
+    int mInsuType = 100;
     long backPressedTime = 0;
     int FINISH_INTERVAL_TIME = 2000;
 
@@ -32,6 +41,24 @@ public class MainActivity extends BaseActivity {
 
         mDrawerLayout = findViewById(R.id.drawerLayout);
         mDrawerView = findViewById(R.id.drawer);
+
+        mNoInsuRadio = findViewById(R.id.noInsuRadio);
+        mBasicInsuRadio = findViewById(R.id.basicInsuRadio);
+        mPremiumInsuRadio = findViewById(R.id.premiumInsuRadio);
+
+        mBtnGoToRide = findViewById(R.id.btnGoToRide);
+        mBtnGoToRide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mInsuType==100){
+                    showCustomToast("보험 여부를 선택해주세요");
+                }else {
+                    Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                    intent.putExtra("insuType", mInsuType);
+                    startActivity(intent);
+                }
+            }
+        });
 
         mMenuHamburger = findViewById(R.id.menuHamburger);
         mMenuHamburger.setOnClickListener(new View.OnClickListener() {
@@ -109,5 +136,29 @@ public class MainActivity extends BaseActivity {
 
         }
 
+    }
+
+    public void onClickRadioBtn(View view){
+        unCheckRadioBtn();
+        switch (view.getId()){
+            case R.id.noInsuRadio:
+                mNoInsuRadio.setChecked(true);
+                mInsuType = 0;
+                break;
+            case R.id.basicInsuRadio:
+                mBasicInsuRadio.setChecked(true);
+                mInsuType=1;
+                break;
+            case R.id.premiumInsuRadio:
+                mPremiumInsuRadio.setChecked(true);
+                mInsuType=2;
+                break;
+        }
+    }
+
+    public void unCheckRadioBtn(){
+        mNoInsuRadio.setChecked(false);
+        mBasicInsuRadio.setChecked(false);
+        mPremiumInsuRadio.setChecked(false);
     }
 }

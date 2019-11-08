@@ -21,23 +21,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".src.InsuActivity"></activity>
-        <activity android:name=".src.VideoActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAAtMdAAcIoEuh-XUX18RFB_aj_zbJm15I" />
+            android:value="AIzaSyDgP0N1hW-lUGnFepCF50-UsTZlwkjUorQ" />
+
+        <activity android:name=".src.MapActivity"></activity>
+        <activity android:name=".src.InsuActivity" />
+        <activity android:name=".src.VideoActivity" />
 
         <activity
             android:name=".src.SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".src.main.MainActivity"></activity>
+        <activity android:name=".src.main.MainActivity" />
         <activity android:name=".src.Helmat.HelmetActivity" />
 
         <provider
