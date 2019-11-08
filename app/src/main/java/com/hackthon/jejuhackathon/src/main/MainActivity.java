@@ -14,6 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.hackthon.jejuhackathon.R;
 import com.hackthon.jejuhackathon.src.BaseActivity;
+import com.hackthon.jejuhackathon.src.Helmat.HelmetActivity;
 import com.hackthon.jejuhackathon.src.InsuActivity;
 import com.hackthon.jejuhackathon.src.Map2Activity;
 import com.hackthon.jejuhackathon.src.VideoActivity;
@@ -49,10 +50,10 @@ public class MainActivity extends BaseActivity {
         mBtnGoToRide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mInsuType == 100) {
+                 if (mInsuType == 100) {
                     showCustomToast("보험 여부 선택해주세요");
                 } else {
-                    Intent intent = new Intent(MainActivity.this, Map2Activity.class);
+                    Intent intent = new Intent(MainActivity.this, HelmetActivity.class);
                     intent.putExtra("insuType", mInsuType);
                     startActivity(intent);
                 }

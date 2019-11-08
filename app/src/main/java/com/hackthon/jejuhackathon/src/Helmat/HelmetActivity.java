@@ -26,21 +26,37 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.hardware.Camera;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.hardware.camera2.CameraCaptureSession;
+import android.hardware.camera2.CameraDevice;
+import android.hardware.camera2.CaptureRequest;
+import android.media.ExifInterface;
+import android.media.ImageReader;
 import android.media.MediaScannerConnection;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.util.SparseIntArray;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -55,27 +71,45 @@ import com.google.api.services.vision.v1.Vision;
 import com.google.api.services.vision.v1.VisionRequest;
 import com.google.api.services.vision.v1.VisionRequestInitializer;
 import com.google.api.services.vision.v1.model.AnnotateImageRequest;
+import com.google.api.services.vision.v1.model.AnnotateImageResponse;
 import com.google.api.services.vision.v1.model.BatchAnnotateImagesRequest;
 import com.google.api.services.vision.v1.model.BatchAnnotateImagesResponse;
+import com.google.api.services.vision.v1.model.EntityAnnotation;
+import com.google.api.services.vision.v1.model.FaceAnnotation;
 import com.google.api.services.vision.v1.model.Feature;
 import com.google.api.services.vision.v1.model.Image;
 import com.google.api.services.vision.v1.model.ImageContext;
+import com.google.api.services.vision.v1.model.ImageSource;
 import com.google.api.services.vision.v1.model.TextAnnotation;
+
+
 import com.hackthon.jejuhackathon.R;
 import com.hackthon.jejuhackathon.src.BaseActivity;
+import com.hackthon.jejuhackathon.src.Map2Activity;
 import com.hackthon.jejuhackathon.src.main.MainActivity;
+import com.hackthon.jejuhackathon.src.ride.RideActivity;
 import com.hackthon.jejuhackathon.src.utils.PackageManagerUtils;
+
 
 import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import okio.ByteString;
 
 
 public class HelmetActivity extends BaseActivity {
@@ -114,8 +148,19 @@ public class HelmetActivity extends BaseActivity {
 
     private TextView mTextViewResult;
 
-    String bank;
-    String number;
+    MyCameraPreview myCameraPreview;
+    FrameLayout mFrame;
+
+    int CAMERA_FACING = Camera.CameraInfo.CAMERA_FACING_FRONT;
+
+    private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
+
+    static {
+        ORIENTATIONS.append(ExifInterface.ORIENTATION_NORMAL, 0);
+        ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_90, 90);
+        ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_180, 180);
+        ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_270, 270);
+    }
 
     private ImageView mImageViewHelmet;
 
@@ -124,19 +169,33 @@ public class HelmetActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_helmet);
         mContext = this;
-        init();
         checkPermissions();
-
+        init();
     }
 
 
     void init() {
-        mImageViewHelmet = findViewById(R.id.activity_helmet_image);
-        mTextViewResult = findViewById(R.id.activity_helmet_tv_result);
+
+        mFrame = findViewById(R.id.cameraPreview);
+
+//         상태바를 안보이도록 합니다.
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        startCamera();
+
     }
 
+    void startCamera() {
 
-    private boolean checkPermissions() {
+        // Create our Preview view and set it as the content of our activity.
+        myCameraPreview = new MyCameraPreview(this, CAMERA_FACING);
+
+        mFrame.addView(myCameraPreview, 0);
+
+    }
+
+    public boolean checkPermissions() {
         int result;
         List<String> permissionList = new ArrayList<>();
         for (String pm : permissions) {
@@ -180,98 +239,68 @@ public class HelmetActivity extends BaseActivity {
         }
     }
 
-    private void takePhoto() {
-
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); //사진을 찍기 위하여 설정합니다.
-        File photoFile = null;
-        try {
-            photoFile = createImageFile();
-        } catch (IOException e) {
-            showCustomToast(mContext.getString(R.string.school_certification_image_error));
-            finish();
-        }
-        if (photoFile != null) {
-            photoUri = FileProvider.getUriForFile(HelmetActivity.this,
-                    "com.hackthon.jejuhackathon.provider", photoFile); //FileProvider의 경우 이전 포스트를 참고하세요.
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri); //사진을 찍어 해당 Content uri를 photoUri에 적용시키기 위함
-            startActivityForResult(intent, PICK_FROM_CAMERA);
-        }
-
-//        if (PermissionUtils.requestPermission(
-//                this,
-//                CAMERA_PERMISSIONS_REQUEST,
-//                Manifest.permission.READ_EXTERNAL_STORAGE,
-//                Manifest.permission.CAMERA)) {
-//            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            Uri photoUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", getCameraFile());
-//            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-//            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//            startActivityForResult(intent, CAMERA_IMAGE_REQUEST);
+//
+//    public File getCameraFile() {
+//        File dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        return new File(dir, FILE_NAME);
+//    }
+//
+//
+//    private File createImageFile() throws IOException {
+//        // Create an image file name
+//        String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
+//        String imageFileName = "IP" + timeStamp + "_";
+//        File storageDir = new File(Environment.getExternalStorageDirectory() + "/jeju/"); //test라는 경로에 이미지를 저장하기 위함
+//        if (!storageDir.exists()) {
+//            storageDir.mkdirs();
 //        }
-    }
-
-    public File getCameraFile() {
-        File dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        return new File(dir, FILE_NAME);
-    }
-
-
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
-        String imageFileName = "IP" + timeStamp + "_";
-        File storageDir = new File(Environment.getExternalStorageDirectory() + "/jeju/"); //test라는 경로에 이미지를 저장하기 위함
-        if (!storageDir.exists()) {
-            storageDir.mkdirs();
-        }
-        File image = File.createTempFile(
-                imageFileName,
-                ".jpg",
-                storageDir
-        );
-        return image;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK) {
-            Toast.makeText(HelmetActivity.this, "이미지 처리 오류! 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
-        }
-        if (requestCode == PICK_FROM_ALBUM) {
-            if (data == null) {
-                return;
-            }
-            photoUri = data.getData();
-            cropImage();
-        } else if (requestCode == PICK_FROM_CAMERA) {
-            cropImage();
-            MediaScannerConnection.scanFile(HelmetActivity.this, //앨범에 사진을 보여주기 위해 Scan을 합니다.
-                    new String[]{photoUri.getPath()}, null,
-                    new MediaScannerConnection.OnScanCompletedListener() {
-                        public void onScanCompleted(String path, Uri uri) {
-                        }
-                    });
-        } else if (requestCode == CROP_FROM_CAMERA) {
-            try { //저는 bitmap 형태의 이미지로 가져오기 위해 아래와 같이 작업하였으며 Thumbnail을 추출하였습니다.
-
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
-                Bitmap thumbImage = ThumbnailUtils.extractThumbnail(bitmap, 800, 500);
-                ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                thumbImage.compress(Bitmap.CompressFormat.JPEG, 100, bs); //이미지가 클 경우 OutOfMemoryException 발생이 예상되어 압축
-
-
-                mImageViewHelmet.setImageBitmap(thumbImage);
-//                Glide.with(mContext).load(R.drawable.activity_helmet_image).into(mImageViewHelmet);
-                mMode = AFTER_IMAGE;
-            } catch (Exception e) {
-            }
-            Uri photoUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", getCameraFile());
-//            uploadImage(photoUri);
-            uploadImage(data.getData());
+//        File image = File.createTempFile(
+//                imageFileName,
+//                ".jpg",
+//                storageDir
+//        );
+//        return image;
+//    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode != RESULT_OK) {
+//            Toast.makeText(HelmetActivity.this, "이미지 처리 오류! 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+//        }
+//        if (requestCode == PICK_FROM_ALBUM) {
+//            if (data == null) {
+//                return;
 //            }
-        }
-    }
+//            photoUri = data.getData();
+//            cropImage();
+//        } else if (requestCode == PICK_FROM_CAMERA) {
+//            cropImage();
+//            MediaScannerConnection.scanFile(HelmetActivity.this, //앨범에 사진을 보여주기 위해 Scan을 합니다.
+//                    new String[]{photoUri.getPath()}, null,
+//                    new MediaScannerConnection.OnScanCompletedListener() {
+//                        public void onScanCompleted(String path, Uri uri) {
+//                        }
+//                    });
+//        } else if (requestCode == CROP_FROM_CAMERA) {
+//            try { //저는 bitmap 형태의 이미지로 가져오기 위해 아래와 같이 작업하였으며 Thumbnail을 추출하였습니다.
+//
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
+//                Bitmap thumbImage = ThumbnailUtils.extractThumbnail(bitmap, 800, 500);
+//                ByteArrayOutputStream bs = new ByteArrayOutputStream();
+//                thumbImage.compress(Bitmap.CompressFormat.JPEG, 100, bs); //이미지가 클 경우 OutOfMemoryException 발생이 예상되어 압축
+//
+//
+//                mImageViewHelmet.setImageBitmap(thumbImage);
+////                Glide.with(mContext).load(R.drawable.activity_helmet_image).into(mImageViewHelmet);
+//                mMode = AFTER_IMAGE;
+//            } catch (Exception e) {
+//            }
+//            Uri photoUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", getCameraFile());
+////            uploadImage(photoUri);
+//            uploadImage(data.getData());
+//        }
+//    }
 
 
     public void uploadImage(Uri uri) {
@@ -283,7 +312,9 @@ public class HelmetActivity extends BaseActivity {
                                 MediaStore.Images.Media.getBitmap(getContentResolver(), uri),
                                 MAX_DIMENSION);
 
-                bitmap = rotate(bitmap, 90); //샘플이미지파일
+//                bitmap = rotate(bitmap, 90); //샘플이미지파일
+
+
                 callCloudVision(bitmap);
 //                mMainImage.setImageBitmap(bitmap);
 
@@ -295,12 +326,11 @@ public class HelmetActivity extends BaseActivity {
             Log.d(TAG, "Image picker gave us a null image.");
             Toast.makeText(this, "다시 시도해주세요", Toast.LENGTH_LONG).show();
         }
-        showProgressDialog(this);
+//        showProgressDialog(this);
 
     }
 
-
-    private void callCloudVision(final Bitmap bitmap) {
+    public void callCloudVision(final Bitmap bitmap) {
         // Switch text to loading
 //        mImageDetails.setText(R.string.loading_message);
         //로딩넣으면될듯
@@ -315,31 +345,43 @@ public class HelmetActivity extends BaseActivity {
         }
     }
 
-    private static String convertResponseToString(BatchAnnotateImagesResponse response) {
+    public static String convertResponseToString(BatchAnnotateImagesResponse response) {
         StringBuilder message = new StringBuilder("");
 
 //        List<TextAnnotation> labels = response.getResponses().get(0).getFullTextAnnotation();
 
-        final TextAnnotation text = response.getResponses().get(0).getFullTextAnnotation();
-
-//        if (labels != null) {
-//            for (EntityAnnotation label : labels) {
-//                message.append(String.format(Locale.US, "%.3f: %s", label.getScore(), label.getDescription()));
-//                message.append("\n");
-//            }
-//        } else {
-//            message.append("nothing");
+//        final TextAnnotation text = response.getResponses().get(0).getLabelAnnotations();
+//
+////        if (labels != null) {
+////            for (EntityAnnotation label : labels) {
+////                message.append(String.format(Locale.US, "%.3f: %s", label.getScore(), label.getDescription()));
+////                message.append("\n");
+////            }
+////        } else {
+////            message.append("nothing");
+////        }
+//
+//        if (text != null) {
+//            message.append(text.getText());
 //        }
 
-        if (text != null) {
-            message.append(text.getText());
+
+        List<EntityAnnotation> labels = response.getResponses().get(0).getLabelAnnotations();
+        if (labels != null) {
+            for (EntityAnnotation label : labels) {
+                message.append(String.format(Locale.US, "%.3f: %s", label.getScore(), label.getDescription()));
+                message.append("\n");
+            }
+        } else {
+            message.append("nothing");
         }
 
         return message.toString();
+
     }
 
 
-    private class LableDetectionTask extends AsyncTask<Object, Void, String> {
+    public class LableDetectionTask extends AsyncTask<Object, Void, String> {
         private final WeakReference<HelmetActivity> mActivityWeakReference;
         private Vision.Images.Annotate mRequest;
 
@@ -365,64 +407,33 @@ public class HelmetActivity extends BaseActivity {
         }
 
         protected void onPostExecute(String result) {
-            HelmetActivity activity = mActivityWeakReference.get();
-            if (activity != null && !activity.isFinishing()) {
-                System.out.println(result);
-                int a = result.indexOf("-");
-                if (a != -1) {
-                    String gender = result.substring(a + 1, a + 2);
-                    System.out.println("a= " + gender);
-                    if (gender.equals("1")) {
-                        mButtonMan.setPressed(true);
-                        mButtonMan.setSelected(true);
-                        mGender = "M";
-                        genderCheck = true;
-                    } else if (gender.equals("2")) {
-                        mButtonWoman.setPressed(true);
-                        mButtonWoman.setSelected(true);
-                        mGender = "W";
-                        genderCheck = true;
-                    }
-                }
-                int b = result.indexOf("성명");
-                if (b != -1) {
-                    String name = result.substring(b + 3, b + 6);
-                    System.out.println("b= " + name);
-                    mTextViewName.setText(name);
-                }
-                int c = result.indexOf("학과");
-                if (c != -1) {
-                    String dept = result.substring(c + 3, c + 9);
-                    System.out.println("c= " + dept);
-                    mTextViewDept.setText(dept);
-                }
-                int d = result.indexOf("121");
-                if (d != -1) {
-                    String code = result.substring(d, d + 8);
-                    System.out.println("d= " + code);
-                    mTextViewCode.setText(code);
-                }
-//                error.setVisibility(View.VISIBLE);
-            }
+            Log.d("result", result);
+            showCustomToast(result);
             hideProgressDialog();
-//            try {
-//                uploadFileToFireBase(photoUri);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+            if(result.contains("Helmet")){
 
+            }
+            else{
+                HelmetCheckCustomDialog helmetCheckCustomDialog = new HelmetCheckCustomDialog(mContext, new HelmetCheckCustomDialog.DeleteDialogListener() {
+                    @Override
+                    public void clickYesBtn() {
+
+                    }
+
+                    @Override
+                    public void clickNoBtn() {
+                        Intent intent = new Intent(mContext, Map2Activity.class);
+                        startActivity(intent);
+                    }
+                });
+                helmetCheckCustomDialog.show();
+            }
+            HelmetActivity activity = mActivityWeakReference.get();
         }
+
     }
 
-    public void genderClick(View view) {
-        switch (view.getId()) {
-            case R.id.activity_helmet_certification:
-                break;
-        }
-    }
-
-
-    private Vision.Images.Annotate prepareAnnotationRequest(final Bitmap bitmap) throws IOException {
+    public Vision.Images.Annotate prepareAnnotationRequest(final Bitmap bitmap) throws IOException {
         HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
         JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
 
@@ -468,11 +479,10 @@ public class HelmetActivity extends BaseActivity {
             base64EncodedImage.encodeContent(imageBytes);
             annotateImageRequest.setImage(base64EncodedImage);
 
-            // add the features we want
             annotateImageRequest.setFeatures(new ArrayList<Feature>() {{
                 Feature labelDetection = new Feature();
-                labelDetection.setType("DOCUMENT_TEXT_DETECTION");
-//                labelDetection.setMaxResults(MAX_LABEL_RESULTS);
+                labelDetection.setType("LABEL_DETECTION");
+                labelDetection.setMaxResults(10);
                 add(labelDetection);
             }});
             annotateImageRequest.setImageContext(new ImageContext());
@@ -490,14 +500,14 @@ public class HelmetActivity extends BaseActivity {
         return annotateRequest;
     }
 
+//
+//    private Bitmap rotate(Bitmap bitmap, float degree) {
+//        Matrix matrix = new Matrix();
+//        matrix.postRotate(degree);
+//        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+//    }
 
-    private Bitmap rotate(Bitmap bitmap, float degree) {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(degree);
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-    }
-
-    private Bitmap scaleBitmapDown(Bitmap bitmap, int maxDimension) {
+    public Bitmap scaleBitmapDown(Bitmap bitmap, int maxDimension) {
 
         int originalWidth = bitmap.getWidth();
         int originalHeight = bitmap.getHeight();
@@ -518,115 +528,80 @@ public class HelmetActivity extends BaseActivity {
     }
 
 
-    private void goToAlbum() {
+//    private void goToAlbum() {
+//
+//        Intent intent = new Intent(Intent.ACTION_PICK); //ACTION_PICK 즉 사진을 고르겠다!
+//        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+//        startActivityForResult(intent, PICK_FROM_ALBUM);
+//    }
+//
+//
+//    public void cropImage() {
+//        this.grantUriPermission("com.android.camera", photoUri,
+//                Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//        Intent intent = new Intent("com.android.camera.action.CROP");
+//        intent.setDataAndType(photoUri, "image/*");
+//
+//        List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent, 0);
+//        grantUriPermission(list.get(0).activityInfo.packageName, photoUri,
+//                Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//        int size = list.size();
+//        if (size == 0) {
+//            Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_SHORT).show();
+//            return;
+//        } else {
+//            Toast.makeText(this, "용량이 큰 사진의 경우 시간이 오래 걸릴 수 있습니다.", Toast.LENGTH_SHORT).show();
+//            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//            intent.putExtra("crop", "true");
+//            intent.putExtra("aspectX", 1);
+//            intent.putExtra("aspectY", 2);
+//            intent.putExtra("scale", true);
+//            File croppedFileName = null;
+//            try {
+//                croppedFileName = createImageFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            File folder = new File(Environment.getExternalStorageDirectory() + "/inha/");
+//            File tempFile = new File(folder.toString(), croppedFileName.getName());
+//
+//            photoUri = FileProvider.getUriForFile(HelmetActivity.this,
+//                    "com.hackthon.jejuhackathon.provider", tempFile);
+//
+//            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//
+//
+//            intent.putExtra("return-data", false);
+//            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+//            intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString()); //Bitmap 형태로 받기 위해 해당 작업 진행
+//
+//            Intent i = new Intent(intent);
+//            ResolveInfo res = list.get(0);
+//            i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//            i.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//            grantUriPermission(res.activityInfo.packageName, photoUri,
+//                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//
+//            i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+//            startActivityForResult(i, CROP_FROM_CAMERA);
+//
+//        }
+//
+//    }
 
-        Intent intent = new Intent(Intent.ACTION_PICK); //ACTION_PICK 즉 사진을 고르겠다!
-        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-        startActivityForResult(intent, PICK_FROM_ALBUM);
-    }
 
-
-    public void cropImage() {
-        this.grantUriPermission("com.android.camera", photoUri,
-                Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(photoUri, "image/*");
-
-        List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent, 0);
-        grantUriPermission(list.get(0).activityInfo.packageName, photoUri,
-                Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        int size = list.size();
-        if (size == 0) {
-            Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_SHORT).show();
-            return;
-        } else {
-            Toast.makeText(this, "용량이 큰 사진의 경우 시간이 오래 걸릴 수 있습니다.", Toast.LENGTH_SHORT).show();
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            intent.putExtra("crop", "true");
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
-            intent.putExtra("scale", true);
-            File croppedFileName = null;
-            try {
-                croppedFileName = createImageFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            File folder = new File(Environment.getExternalStorageDirectory() + "/inha/");
-            File tempFile = new File(folder.toString(), croppedFileName.getName());
-
-            photoUri = FileProvider.getUriForFile(HelmetActivity.this,
-                    "com.hackthon.jejuhackathon.provider", tempFile);
-
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-
-
-            intent.putExtra("return-data", false);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-            intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString()); //Bitmap 형태로 받기 위해 해당 작업 진행
-
-            Intent i = new Intent(intent);
-            ResolveInfo res = list.get(0);
-            i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            i.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            grantUriPermission(res.activityInfo.packageName, photoUri,
-                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-            i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-            startActivityForResult(i, CROP_FROM_CAMERA);
-
-        }
-
-    }
-
-
-    void imageUploadChoiceDialog() {
-        DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                takePhoto();
-            }
-        };
-        DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                goToAlbum();
-            }
-        };
-        DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        };
-        new AlertDialog.Builder(mContext)
-                .setTitle("업로드할 이미지 선택")
-                .setPositiveButton("사진촬영", cameraListener)
-                .setNeutralButton("앨범선택", albumListener)
-                .setNegativeButton("취소", cancelListener)
-                .show();
-    }
-
-    public void customOnClick(View view) throws JSONException {
+    public void customOnClick(View view)  {
         switch (view.getId()) {
-//            case R.id.activity_school_certification_iv_back:
-//                finish();
-//                break;
-            case R.id.activity_helmet_certification:
-                if (mMode == BEFORE_IMAGE) {
-                    imageUploadChoiceDialog();
-//                } else if (mMode == AFTER_SEVER_UPLOAD) {
-//                    startActivity(new Intent(getApplication(), LoginActivity.class));
-//                }
-                    break;
+            case R.id.btn_camera:
+                showProgressDialog(this);
+                myCameraPreview.takePicture();
+                break;
+            default:
+                break;
 
-//            case R.id.basic_info_done:
-//            default:
-//                break;
-                }
         }
 
     }

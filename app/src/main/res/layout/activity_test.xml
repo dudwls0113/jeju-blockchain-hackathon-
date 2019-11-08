@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<FrameLayout
+    android:id="@+id/cameraPreview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/activity_helmet_certification"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginHorizontal="20dp"-->
+    <!--android:layout_marginTop="21dp"-->
+    <!--android:background="@drawable/bg_rec_trans_yellow"-->
+    <!--android:gravity="center"-->
+    <!--android:onClick="customOnClick"-->
+    <!--android:padding="10dp"-->
+    <!--android:text="헬멧 인증하기"-->
+    <!--android:textColor="@color/colorPrimary" />-->
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/img_helmet_guide" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btn_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="40dp"
+        android:onClick="customOnClick"
+        android:src="@drawable/btn_camera" />
+</FrameLayout>
+
+</RelativeLayout>
