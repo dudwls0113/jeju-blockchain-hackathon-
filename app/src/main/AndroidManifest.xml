@@ -10,8 +10,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--<uses-feature android:name="android.hardware.camera" android:required="true" />-->
-    <!--<uses-feature android:name="android.hardware.camera.front" android:required="true" />-->
 
     <application
         android:allowBackup="true"
@@ -22,35 +20,45 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".src.ride.RideActivity"></activity>
 
-        <activity android:name=".src.Helmat.HelmetActivity">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDgP0N1hW-lUGnFepCF50-UsTZlwkjUorQ" />
+
+        <activity android:name=".src.MapActivity" />
+        <activity android:name=".src.InsuActivity" />
+        <activity android:name=".src.VideoActivity" />
+        <activity
+            android:name=".src.SplashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!--<activity android:name=".src.Helmat.AadHaarPictureActivity">-->
-        <!--<intent-filter>-->
-        <!--<action android:name="android.intent.action.MAIN" />-->
-
-        <!--<category android:name="android.intent.category.LAUNCHER" />-->
-        <!--</intent-filter>-->
-        <!--</activity>-->
-        <!--<activity android:name=".src.Helmat.SelfieActivity">-->
-        <!--<intent-filter>-->
-        <!--<action android:name="android.intent.action.MAIN" />-->
-
-        <!--<category android:name="android.intent.category.LAUNCHER" />-->
-        <!--</intent-filter>-->
-        <!--</activity>-->
+        <activity android:name=".src.main.MainActivity" />
+        <activity android:name=".src.Helmat.HelmetActivity" /> <!-- <activity android:name=".src.Helmat.AadHaarPictureActivity"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <!-- <activity android:name=".src.Helmat.SelfieActivity"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <activity android:name=".src.Helmat.TestActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <provider
@@ -62,8 +70,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
     </application>
-
 
 </manifest>

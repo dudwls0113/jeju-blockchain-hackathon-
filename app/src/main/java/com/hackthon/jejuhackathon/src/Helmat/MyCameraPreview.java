@@ -263,7 +263,7 @@ public class MyCameraPreview extends SurfaceView implements SurfaceHolder.Callba
 
                 uri = Uri.fromFile(outputFile);
                 // 갤러리에 반영
-                ((HelmetActivity)mContext).hideProgressDialog();
+//                ((HelmetActivity)mContext).hideProgressDialog();
                 ((HelmetActivity)mContext).uploadImage(uri);
 
                 Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);

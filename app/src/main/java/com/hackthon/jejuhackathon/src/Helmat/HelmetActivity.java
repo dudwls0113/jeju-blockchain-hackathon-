@@ -86,6 +86,7 @@ import com.google.api.services.vision.v1.model.TextAnnotation;
 import com.hackthon.jejuhackathon.R;
 import com.hackthon.jejuhackathon.src.BaseActivity;
 import com.hackthon.jejuhackathon.src.main.MainActivity;
+import com.hackthon.jejuhackathon.src.ride.RideActivity;
 import com.hackthon.jejuhackathon.src.utils.PackageManagerUtils;
 
 
@@ -407,10 +408,26 @@ public class HelmetActivity extends BaseActivity {
         protected void onPostExecute(String result) {
             Log.d("result", result);
             showCustomToast(result);
-            HelmetActivity activity = mActivityWeakReference.get();
-
             hideProgressDialog();
+            if(result.contains("Helmet")){
 
+            }
+            else{
+                HelmetCheckCustomDialog helmetCheckCustomDialog = new HelmetCheckCustomDialog(mContext, new HelmetCheckCustomDialog.DeleteDialogListener() {
+                    @Override
+                    public void clickYesBtn() {
+
+                    }
+
+                    @Override
+                    public void clickNoBtn() {
+                        Intent intent = new Intent(mContext, RideActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                helmetCheckCustomDialog.show();
+            }
+            HelmetActivity activity = mActivityWeakReference.get();
         }
 
     }
@@ -578,8 +595,8 @@ public class HelmetActivity extends BaseActivity {
     public void customOnClick(View view)  {
         switch (view.getId()) {
             case R.id.btn_camera:
-                myCameraPreview.takePicture();
                 showProgressDialog(this);
+                myCameraPreview.takePicture();
                 break;
             default:
                 break;

@@ -3,4 +3,27 @@
     <color name="colorPrimary">#f7b500</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+<!--    스플래시 색 -->
+    <color name="splashBackgroundColor">#000000</color>
+    <color name="splashTextColor">#f7b500</color>
+
+<!--    메인액티비 색 -->
+    <color name="moneyTextColor">#848484</color>
+
+    <color name="mainWhiteColor">#ffffff</color>
+
+    <color name="colorWhiteGray">#f9fafa</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlueTrans">#87B1DB</color>
+
+    <color name="colorSkyBlue">#e3f2ff</color>
+    <color name="colorWhiteSkyBlue">#f8fcff</color>
+
+    <color name="colorErrorRed">#fc6d70</color>
+    <color name="colorFemaleRed">#fe6c6d</color>
+
+    <color name="colorGray">#b6b6b6</color>
+    <color name="colorBlackTextBold">#4a4a4a</color>
+
 </resources>
