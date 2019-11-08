@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <ImageView
+            android:id="@+id/selfie_taken_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <TextureView
+            android:id="@+id/selfie_camera_ttv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
+
+            <TextView
+                android:id="@+id/activity_helmet_certification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="21dp"
+                android:background="@drawable/bg_rec_trans_yellow"
+                android:gravity="center"
+                android:onClick="customOnClick"
+                android:padding="10dp"
+                android:text="헬멧 인증하기"
+                android:textColor="@color/colorPrimary" />
+
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/selfie_action_ibtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/take_a_picture_btn_img"
+            android:layout_gravity="center_horizontal |bottom"
+            android:layout_marginBottom="15dp"/>
+
+
+    </FrameLayout>
+
+
+</LinearLayout>
+
