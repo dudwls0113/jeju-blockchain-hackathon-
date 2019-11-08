@@ -1,4 +1,4 @@
-package com.hackthon.jejuhackathon.src;
+package com.hackthon.jejuhackathon.src.map;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 
 import com.hackthon.jejuhackathon.R;
-import com.skt.Tmap.TMapCircle;
 import com.skt.Tmap.TMapGpsManager;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapPolygon;

@@ -28,4 +28,7 @@
 
 <!--   티맵 폴리건 색 -->
     <color name="mapTransYellow">#80f7b500</color>
+
+<!--    회원가입 글씨 색 -->
+    <color name="signUpTextGrey">#9f9f9f</color>
 </resources>

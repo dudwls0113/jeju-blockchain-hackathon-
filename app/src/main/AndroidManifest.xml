@@ -20,12 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".src.ride.RideActivity"></activity>
-        <activity android:name=".src.Map2Activity"></activity>
+        <activity android:name=".src.signup.SignUpActivity"></activity>
+        <activity android:name=".src.ride.RideActivity" />
+        <activity android:name=".src.map.Map2Activity" />
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDgP0N1hW-lUGnFepCF50-UsTZlwkjUorQ" />
         <activity android:name=".src.InsuActivity" />
         <activity android:name=".src.VideoActivity" />
         <activity

@@ -16,7 +16,6 @@ import com.hackthon.jejuhackathon.R;
 import com.hackthon.jejuhackathon.src.BaseActivity;
 import com.hackthon.jejuhackathon.src.Helmat.HelmetActivity;
 import com.hackthon.jejuhackathon.src.InsuActivity;
-import com.hackthon.jejuhackathon.src.Map2Activity;
 import com.hackthon.jejuhackathon.src.VideoActivity;
 
 

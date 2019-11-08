@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <android.widget.LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hackthon.jejuhackathon.src.map.Map2Activity">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutTmap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="com.hackthon.jejuhackathon.src.Map2Activity">
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/linearLayoutTmap"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-        </LinearLayout>
-    </android.widget.LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/recBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="17dp"
+        android:background="@drawable/bg_circle_yellow"
+        android:gravity="center"
+        android:text="REC"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="56dp"
+        app:srcCompat="@drawable/ic_ment_klay" />
+
+</FrameLayout>
