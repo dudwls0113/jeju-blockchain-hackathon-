@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
@@ -16,7 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.hackthon.jejuhackathon.R;
 import com.hackthon.jejuhackathon.src.BaseActivity;
 import com.hackthon.jejuhackathon.src.InsuActivity;
-import com.hackthon.jejuhackathon.src.MapActivity;
+import com.hackthon.jejuhackathon.src.Map2Activity;
 import com.hackthon.jejuhackathon.src.VideoActivity;
 
 
@@ -50,10 +49,10 @@ public class MainActivity extends BaseActivity {
         mBtnGoToRide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mInsuType==100){
-                    showCustomToast("보험 여부를 선택해주세요");
-                }else {
-                    Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                if (mInsuType == 100) {
+                    showCustomToast("보험 여부 선택해주세요");
+                } else {
+                    Intent intent = new Intent(MainActivity.this, Map2Activity.class);
                     intent.putExtra("insuType", mInsuType);
                     startActivity(intent);
                 }
@@ -64,13 +63,13 @@ public class MainActivity extends BaseActivity {
         mMenuHamburger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if(isHamburgerOpen){
-                   mDrawerLayout.closeDrawers();
-                   isHamburgerOpen = false;
-               }else {
-                mDrawerLayout.openDrawer(mDrawerView);
-                   isHamburgerOpen = true;
-               }
+                if (isHamburgerOpen) {
+                    mDrawerLayout.closeDrawers();
+                    isHamburgerOpen = false;
+                } else {
+                    mDrawerLayout.openDrawer(mDrawerView);
+                    isHamburgerOpen = true;
+                }
             }
         });
 
@@ -106,8 +105,8 @@ public class MainActivity extends BaseActivity {
         }
     };
 
-    public void onClickBtn(View view){
-        switch (view.getId()){
+    public void onClickBtn(View view) {
+        switch (view.getId()) {
             case R.id.videoBtnLayout:
                 Intent intent = new Intent(this, VideoActivity.class);
                 startActivity(intent);
@@ -138,25 +137,25 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    public void onClickRadioBtn(View view){
+    public void onClickRadioBtn(View view) {
         unCheckRadioBtn();
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.noInsuRadio:
                 mNoInsuRadio.setChecked(true);
                 mInsuType = 0;
                 break;
             case R.id.basicInsuRadio:
                 mBasicInsuRadio.setChecked(true);
-                mInsuType=1;
+                mInsuType = 1;
                 break;
             case R.id.premiumInsuRadio:
                 mPremiumInsuRadio.setChecked(true);
-                mInsuType=2;
+                mInsuType = 2;
                 break;
         }
     }
 
-    public void unCheckRadioBtn(){
+    public void unCheckRadioBtn() {
         mNoInsuRadio.setChecked(false);
         mBasicInsuRadio.setChecked(false);
         mPremiumInsuRadio.setChecked(false);

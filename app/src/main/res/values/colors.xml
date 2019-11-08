@@ -12,4 +12,6 @@
     <color name="moneyTextColor">#848484</color>
 
     <color name="mainWhiteColor">#ffffff</color>
+<!--   티맵 폴리건 색 -->
+    <color name="mapTransYellow">#80f7b500</color>
 </resources>
