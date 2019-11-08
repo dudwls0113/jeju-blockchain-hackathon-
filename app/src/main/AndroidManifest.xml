@@ -21,12 +21,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".src.ride.RideActivity"></activity>
+        <activity android:name=".src.Map2Activity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDgP0N1hW-lUGnFepCF50-UsTZlwkjUorQ" />
-
-        <activity android:name=".src.MapActivity" />
         <activity android:name=".src.InsuActivity" />
         <activity android:name=".src.VideoActivity" />
         <activity
@@ -70,6 +69,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <uses-library android:name="com.google.android.maps" />
     </application>
 
 </manifest>

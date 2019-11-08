@@ -26,4 +26,6 @@
     <color name="colorGray">#b6b6b6</color>
     <color name="colorBlackTextBold">#4a4a4a</color>
 
+<!--   티맵 폴리건 색 -->
+    <color name="mapTransYellow">#80f7b500</color>
 </resources>

@@ -85,6 +85,7 @@ import com.google.api.services.vision.v1.model.TextAnnotation;
 
 import com.hackthon.jejuhackathon.R;
 import com.hackthon.jejuhackathon.src.BaseActivity;
+import com.hackthon.jejuhackathon.src.Map2Activity;
 import com.hackthon.jejuhackathon.src.main.MainActivity;
 import com.hackthon.jejuhackathon.src.ride.RideActivity;
 import com.hackthon.jejuhackathon.src.utils.PackageManagerUtils;
@@ -421,7 +422,7 @@ public class HelmetActivity extends BaseActivity {
 
                     @Override
                     public void clickNoBtn() {
-                        Intent intent = new Intent(mContext, RideActivity.class);
+                        Intent intent = new Intent(mContext, Map2Activity.class);
                         startActivity(intent);
                     }
                 });
