@@ -1,8 +1,8 @@
 package com.hackthon.jejuhackathon.src.main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -15,8 +15,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.hackthon.jejuhackathon.R;
 import com.hackthon.jejuhackathon.src.BaseActivity;
 import com.hackthon.jejuhackathon.src.Helmat.HelmetActivity;
-import com.hackthon.jejuhackathon.src.InsuActivity;
-import com.hackthon.jejuhackathon.src.VideoActivity;
 
 
 public class MainActivity extends BaseActivity {
@@ -38,6 +36,16 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextView klayNum = findViewById(R.id.klayNum);
+
+        SharedPreferences sp = getSharedPreferences("klay", MODE_PRIVATE);
+        int klay = sp.getInt("klay", 100);
+        klayNum.setText(klay+"");
+
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("klay", klay);
+        editor.commit();
+
         mDrawerLayout = findViewById(R.id.drawerLayout);
         mDrawerView = findViewById(R.id.drawer);
 
@@ -49,7 +57,14 @@ public class MainActivity extends BaseActivity {
         mBtnGoToRide.setOnClickListener(v -> {
              if (mInsuType == 100) {
                 showCustomToast("보험 여부 선택해주세요");
-            } else {
+            }
+             else if(mInsuType==2){
+                 showCustomToast("준비중입니다.");
+             }
+             else if(mInsuType==0){
+                 showCustomToast("준비중입니다.");
+             }
+             else {
                 Intent intent = new Intent(MainActivity.this, HelmetActivity.class);
                 intent.putExtra("insuType", mInsuType);
                 startActivity(intent);

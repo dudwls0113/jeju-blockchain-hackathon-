@@ -2,6 +2,7 @@ package com.hackthon.jejuhackathon.src;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -51,8 +52,10 @@ public class BillActivity extends BaseActivity {
     private String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}; //권한 설정 변수
     private static final int MULTIPLE_PERMISSIONS = 101; //권한 동의 여부 문의 후 CallBack 함수에 쓰일 변수
 
-
+    int klay;
     Caver caver;
+    int useklay;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +73,15 @@ public class BillActivity extends BaseActivity {
         mKlayEdit = findViewById(R.id.billKlayEdit);
         mPayBtn = findViewById(R.id.payBtn);
 
+        sp = getSharedPreferences("klay", MODE_PRIVATE);
+        klay = sp.getInt("klay", 100)+5;
+
+        mMyKlayText.setText(klay+"");
+
         if(isHelmet){
             sendKlay(1);
         }
+
         long now = System.currentTimeMillis();
         Date date = new Date(now);
         SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy. MM. dd");
@@ -84,6 +93,7 @@ public class BillActivity extends BaseActivity {
         int sum = 2420;
         mSumText.setText(sum+"원");
 
+        useklay=0;
 
         mKlayEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -95,8 +105,14 @@ public class BillActivity extends BaseActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(mKlayEdit.getText().toString().length()>0) {
                     int sum = ride + insu - Integer.parseInt(mKlayEdit.getText().toString()) * 30;
-                    mSumText.setText(sum + "원");
                     mSaleText.setText((Integer.parseInt(mKlayEdit.getText().toString())) * 30 + "원");
+
+                    if(sum>=0) {
+                        mSumText.setText(sum + "원");
+                        useklay = Integer.parseInt(mKlayEdit.getText().toString());
+                    }else{
+                        mSumText.setText("0원");
+                    }
                 } }
 
             @Override
@@ -111,10 +127,16 @@ public class BillActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.payBtn:
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putInt("klay", (klay-useklay));
+                editor.commit();
+
+                showCustomToast("결제가 완료되었습니다.");
                 Intent intent = new Intent(BillActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                break;
         }
     }
 
