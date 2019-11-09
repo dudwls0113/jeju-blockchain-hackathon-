@@ -44,12 +44,13 @@ public class BillActivity extends BaseActivity {
 
         int ride = 1920;
         int insu = 500;
+        int sum = 2000;
+        mSumText.setText(sum+"원");
 
         mKlayEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                int sum = 2000;
-                mSumText.setText(sum+"원");
+
             }
 
             @Override

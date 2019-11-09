@@ -160,6 +160,7 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
             case R.id.finishRidingBtn:
                 Intent intent = new Intent(Map2Activity.this, BillActivity.class);
                 startActivity(intent);
+                break;
         }
     }
 

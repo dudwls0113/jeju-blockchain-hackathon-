@@ -2,7 +2,6 @@ package com.hackthon.jejuhackathon.src.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -15,8 +14,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.hackthon.jejuhackathon.R;
 import com.hackthon.jejuhackathon.src.BaseActivity;
 import com.hackthon.jejuhackathon.src.Helmat.HelmetActivity;
-import com.hackthon.jejuhackathon.src.InsuActivity;
-import com.hackthon.jejuhackathon.src.VideoActivity;
 
 
 public class MainActivity extends BaseActivity {
