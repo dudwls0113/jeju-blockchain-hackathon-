@@ -27,6 +27,7 @@ android {
     aaptOptions {
         noCompress "tflite"
     }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 }
 
 dependencies {
@@ -82,7 +83,6 @@ dependencies {
     implementation files('libs/com.skt.Tmap_1.63.jar')
 
 
-
     //
     implementation 'com.google.firebase:firebase-ml-vision:20.0.0'
     implementation 'com.google.firebase:firebase-ml-vision-object-detection-model:16.0.0'
@@ -92,4 +92,9 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'org.jetbrains.anko:anko-commons:0.10.5'
+
+
+    implementation 'com.klaytn.caver:core:1.0.1-android'
+    implementation "ch.qos.logback:logback-classic:1.2.3"
+
 }

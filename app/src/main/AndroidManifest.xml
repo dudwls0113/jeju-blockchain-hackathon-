@@ -20,29 +20,32 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".src.signup.SignUpActivity"></activity>
-        <!--        <activity android:name=".src.ride.RideActivity">-->
-        <!--            <intent-filter>-->
-        <!--                <action android:name="android.intent.action.MAIN" />-->
+        <activity android:name=".src.Klaytn.KlaytnActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-        <!--            </intent-filter>-->
-        <!--        </activity>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".src.signup.SignUpActivity" /> <!-- <activity android:name=".src.ride.RideActivity"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <activity android:name=".src.map.Map2Activity" />
-
-        <activity android:name=".src.login.LogInActivity"></activity>
+        <activity android:name=".src.login.LogInActivity" />
         <activity android:name=".src.ride.RideActivity" />
         <activity android:name=".src.InsuActivity" />
         <activity android:name=".src.VideoActivity" />
         <activity
             android:name=".src.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".src.main.MainActivity" />
         <activity android:name=".src.Helmat.HelmetActivity" /> <!-- <activity android:name=".src.Helmat.AadHaarPictureActivity"> -->
@@ -66,24 +69,20 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".src.ride.Ride">
-
-
-        </activity>
-
+        <activity android:name=".src.ride.Ride"></activity>
         <activity android:name=".src.camera.CameraActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
         <service
             android:name="ai.fritz.core.FritzCustomModelService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.hackthon.jejuhackathon.provider"
