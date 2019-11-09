@@ -39,8 +39,12 @@ public class MainActivity extends BaseActivity {
         TextView klayNum = findViewById(R.id.klayNum);
 
         SharedPreferences sp = getSharedPreferences("klay", MODE_PRIVATE);
-        int klay = sp.getInt("klay", 120);
+        int klay = sp.getInt("klay", 100);
         klayNum.setText(klay+"");
+
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("klay", klay);
+        editor.commit();
 
         mDrawerLayout = findViewById(R.id.drawerLayout);
         mDrawerView = findViewById(R.id.drawer);
@@ -55,6 +59,9 @@ public class MainActivity extends BaseActivity {
                 showCustomToast("보험 여부 선택해주세요");
             }
              else if(mInsuType==2){
+                 showCustomToast("준비중입니다.");
+             }
+             else if(mInsuType==0){
                  showCustomToast("준비중입니다.");
              }
              else {
