@@ -12,6 +12,13 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
+
+import com.hackthon.jejuhackathon.R;
+import com.hackthon.jejuhackathon.src.Helmat.HelmetActivity;
+import com.hackthon.jejuhackathon.src.Tensor.DetectorActivity;
+import com.hackthon.jejuhackathon.src.main.MainActivity;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -28,7 +35,8 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
     TMapView mTmapView;
     private Context mContext;
     private boolean mTrackingMode = true;
-    private TMapGpsManager mTmapGps=null;
+    private TMapGpsManager mTmapGps = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +48,8 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
         LinearLayout linearLayoutTmap = findViewById(R.id.linearLayoutTmap);
         mTmapView = new TMapView(this);
 
-        mTmapView.setSKTMapApiKey( "220db9a1-476e-4e2e-8691-794c9b0cd38e" );
-        linearLayoutTmap.addView( mTmapView );
+        mTmapView.setSKTMapApiKey("220db9a1-476e-4e2e-8691-794c9b0cd38e");
+        linearLayoutTmap.addView(mTmapView);
 
         mTmapView.setCompassMode(true);
         mTmapView.setIconVisibility(true);
@@ -55,10 +63,10 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
         mTmapGps.setMinDistance(5);
         mTmapGps.setProvider(mTmapGps.NETWORK_PROVIDER);
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1); //위치권한 탐색 허용 관련 내용
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1); //위치권한 탐색 허용 관련 내용
             }
             return;
         }
@@ -78,9 +86,9 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
 //        tMapView.addTMapCircle("circle1", tMapCircle);
 
         ArrayList<TMapPoint> alTMapPoint = new ArrayList<TMapPoint>();
-        alTMapPoint.add( new TMapPoint(33.514578, 126.529531) );
-        alTMapPoint.add( new TMapPoint(33.514674, 126.530126) );
-        alTMapPoint.add( new TMapPoint(33.514459, 126.530105) );
+        alTMapPoint.add(new TMapPoint(33.514578, 126.529531));
+        alTMapPoint.add(new TMapPoint(33.514674, 126.530126));
+        alTMapPoint.add(new TMapPoint(33.514459, 126.530105));
         alTMapPoint.add(new TMapPoint(33.514468, 126.529547));
 
         TMapPolygon tMapPolygon = new TMapPolygon();
@@ -88,16 +96,16 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
         tMapPolygon.setPolygonWidth(2);
         tMapPolygon.setAreaColor(Color.rgb(247, 181, 0));
         tMapPolygon.setAreaAlpha(100);
-        for( int i=0; i<alTMapPoint.size(); i++ ) {
-            tMapPolygon.addPolygonPoint( alTMapPoint.get(i) );
+        for (int i = 0; i < alTMapPoint.size(); i++) {
+            tMapPolygon.addPolygonPoint(alTMapPoint.get(i));
         }
 
         mTmapView.addTMapPolygon("Line1", tMapPolygon);
 
         ArrayList<TMapPoint> alTMapPoint2 = new ArrayList<TMapPoint>();
-        alTMapPoint2.add( new TMapPoint(33.514808, 126.526544) );
-        alTMapPoint2.add( new TMapPoint(33.514806, 126.526740) );
-        alTMapPoint2.add( new TMapPoint(33.514446, 126.526689) );
+        alTMapPoint2.add(new TMapPoint(33.514808, 126.526544));
+        alTMapPoint2.add(new TMapPoint(33.514806, 126.526740));
+        alTMapPoint2.add(new TMapPoint(33.514446, 126.526689));
         alTMapPoint2.add(new TMapPoint(33.514466, 126.526536));
 
         TMapPolygon tMapPolygon2 = new TMapPolygon();
@@ -105,16 +113,16 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
         tMapPolygon2.setPolygonWidth(2);
         tMapPolygon2.setAreaColor(Color.rgb(247, 181, 0));
         tMapPolygon2.setAreaAlpha(100);
-        for( int i=0; i<alTMapPoint2.size(); i++ ) {
-            tMapPolygon2.addPolygonPoint( alTMapPoint2.get(i) );
+        for (int i = 0; i < alTMapPoint2.size(); i++) {
+            tMapPolygon2.addPolygonPoint(alTMapPoint2.get(i));
         }
 
         mTmapView.addTMapPolygon("Line2", tMapPolygon2);
 
         ArrayList<TMapPoint> alTMapPoint3 = new ArrayList<TMapPoint>();
-        alTMapPoint3.add( new TMapPoint(33.513805, 126.528364) );
-        alTMapPoint3.add( new TMapPoint(33.513670, 126.528400) );
-        alTMapPoint3.add( new TMapPoint(33.513750, 126.528690) );
+        alTMapPoint3.add(new TMapPoint(33.513805, 126.528364));
+        alTMapPoint3.add(new TMapPoint(33.513670, 126.528400));
+        alTMapPoint3.add(new TMapPoint(33.513750, 126.528690));
         alTMapPoint3.add(new TMapPoint(33.513956, 126.528513));
 
         TMapPolygon tMapPolygon3 = new TMapPolygon();
@@ -122,16 +130,16 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
         tMapPolygon3.setPolygonWidth(2);
         tMapPolygon3.setAreaColor(Color.rgb(247, 181, 0));
         tMapPolygon3.setAreaAlpha(100);
-        for( int i=0; i<alTMapPoint3.size(); i++ ) {
-            tMapPolygon3.addPolygonPoint( alTMapPoint3.get(i) );
+        for (int i = 0; i < alTMapPoint3.size(); i++) {
+            tMapPolygon3.addPolygonPoint(alTMapPoint3.get(i));
         }
 
         mTmapView.addTMapPolygon("Line3", tMapPolygon3);
 
         ArrayList<TMapPoint> alTMapPoint4 = new ArrayList<TMapPoint>();
-        alTMapPoint4.add( new TMapPoint(33.514792, 126.528223) );
-        alTMapPoint4.add( new TMapPoint(33.514779, 126.528432) );
-        alTMapPoint4.add( new TMapPoint(33.514913, 126.528523) );
+        alTMapPoint4.add(new TMapPoint(33.514792, 126.528223));
+        alTMapPoint4.add(new TMapPoint(33.514779, 126.528432));
+        alTMapPoint4.add(new TMapPoint(33.514913, 126.528523));
         alTMapPoint4.add(new TMapPoint(33.514904, 126.528266));
 
         TMapPolygon tMapPolygon4 = new TMapPolygon();
@@ -139,24 +147,17 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
         tMapPolygon4.setPolygonWidth(2);
         tMapPolygon4.setAreaColor(Color.rgb(247, 181, 0));
         tMapPolygon4.setAreaAlpha(100);
-        for( int i=0; i<alTMapPoint4.size(); i++ ) {
-            tMapPolygon4.addPolygonPoint( alTMapPoint4.get(i) );
+        for (int i = 0; i < alTMapPoint4.size(); i++) {
+            tMapPolygon4.addPolygonPoint(alTMapPoint4.get(i));
         }
 
         mTmapView.addTMapPolygon("Line4", tMapPolygon4);
 
 //        mTmapView.setCenterPoint(126.985302, 37.570841);
-        ImageView slowlyImage = findViewById(R.id.slowlyAlertImage);
-        slowlyImage.setVisibility(View.INVISIBLE);
-        boolean tf = true;
-        if(!tf){
-            slowlyImage.setVisibility(View.VISIBLE);
-        }
-
     }
 
-    public void onClickBtn(View view){
-        switch (view.getId()){
+    public void onClickBtn(View view) {
+        switch (view.getId()) {
             case R.id.finishRidingBtn:
                 Intent intent = new Intent(Map2Activity.this, BillActivity.class);
                 startActivity(intent);
@@ -166,7 +167,7 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
 
     @Override
     public void onLocationChange(Location location) {
-        if(mTrackingMode){
+        if (mTrackingMode) {
             mTmapView.setLocationPoint(location.getLongitude(), location.getLatitude());
         }
     }

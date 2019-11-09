@@ -110,7 +110,7 @@
                 android:id="@+id/billInsuText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1,920원"
+                android:text="500원"
                 android:textColor="@color/billTextGrey" />
         </LinearLayout>
 
@@ -228,7 +228,6 @@
                 android:id="@+id/billSumText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1,920원"
                 android:textColor="@color/billTextGrey" />
         </LinearLayout>
 

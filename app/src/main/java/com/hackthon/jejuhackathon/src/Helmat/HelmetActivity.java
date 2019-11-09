@@ -60,6 +60,8 @@ import com.google.api.services.vision.v1.model.ImageContext;
 
 import com.hackthon.jejuhackathon.R;
 import com.hackthon.jejuhackathon.src.BaseActivity;
+import com.hackthon.jejuhackathon.src.BillActivity;
+import com.hackthon.jejuhackathon.src.Tensor.DetectorActivity;
 import com.hackthon.jejuhackathon.src.map.Map2Activity;
 import com.hackthon.jejuhackathon.src.main.MainActivity;
 import com.hackthon.jejuhackathon.src.utils.PackageManagerUtils;
@@ -368,7 +370,6 @@ public class HelmetActivity extends BaseActivity {
         }
 
         protected void onPostExecute(String result) {
-            Log.d("result", result);
             showCustomToast(result);
             hideProgressDialog();
             if(result.contains("Helmet")){
@@ -383,13 +384,12 @@ public class HelmetActivity extends BaseActivity {
 
                     @Override
                     public void clickNoBtn() {
-                        Intent intent = new Intent(mContext, Map2Activity.class);
+                        Intent intent = new Intent(mContext, DetectorActivity.class);
                         startActivity(intent);
                     }
                 });
                 helmetCheckCustomDialog.show();
             }
-            HelmetActivity activity = mActivityWeakReference.get();
         }
 
     }
@@ -641,6 +641,7 @@ public class HelmetActivity extends BaseActivity {
 ////                        e.printStackTrace();
 ////                    }
 ////                    showCustomToast(mContext, "업로드!");
+//                } else {
 //                } else {
 //                    //실패시
 //                }

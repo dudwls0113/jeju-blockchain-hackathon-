@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: ai.fritz:core:4.1.0@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/993fa7c581118965f000781b20c9569b/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/993fa7c581118965f000781b20c9569b/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9d11550c779377a86ff57b35161fc54f/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9d11550c779377a86ff57b35161fc54f/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

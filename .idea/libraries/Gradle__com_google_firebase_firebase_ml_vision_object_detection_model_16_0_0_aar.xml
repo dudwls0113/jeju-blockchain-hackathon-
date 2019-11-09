@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.firebase:firebase-ml-vision-object-detection-model:16.0.0@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/ea3ac76d9563173d277b276a30d6381f/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/ea3ac76d9563173d277b276a30d6381f/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/20bcd57bae83f604137ab1511a5ab92d/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/20bcd57bae83f604137ab1511a5ab92d/res" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-ml-vision-object-detection-model/16.0.0/d744794686c273d9fe2fdad77ee686c87a47625b/firebase-ml-vision-object-detection-model-16.0.0-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-ml-vision-object-detection-model/16.0.0/d744794686c273d9fe2fdad77ee686c87a47625b/firebase-ml-vision-object-detection-model-16.0.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>
