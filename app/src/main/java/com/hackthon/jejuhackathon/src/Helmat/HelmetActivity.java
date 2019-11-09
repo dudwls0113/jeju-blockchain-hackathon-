@@ -17,36 +17,18 @@
 package com.hackthon.jejuhackathon.src.Helmat;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.hardware.Camera;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
-import android.hardware.camera2.CameraCaptureSession;
-import android.hardware.camera2.CameraDevice;
-import android.hardware.camera2.CaptureRequest;
 import android.media.ExifInterface;
-import android.media.ImageReader;
-import android.media.MediaScannerConnection;
-import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.util.SparseIntArray;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -56,12 +38,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 
-import com.bumptech.glide.Glide;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpTransport;
@@ -71,45 +50,27 @@ import com.google.api.services.vision.v1.Vision;
 import com.google.api.services.vision.v1.VisionRequest;
 import com.google.api.services.vision.v1.VisionRequestInitializer;
 import com.google.api.services.vision.v1.model.AnnotateImageRequest;
-import com.google.api.services.vision.v1.model.AnnotateImageResponse;
 import com.google.api.services.vision.v1.model.BatchAnnotateImagesRequest;
 import com.google.api.services.vision.v1.model.BatchAnnotateImagesResponse;
 import com.google.api.services.vision.v1.model.EntityAnnotation;
-import com.google.api.services.vision.v1.model.FaceAnnotation;
 import com.google.api.services.vision.v1.model.Feature;
 import com.google.api.services.vision.v1.model.Image;
 import com.google.api.services.vision.v1.model.ImageContext;
-import com.google.api.services.vision.v1.model.ImageSource;
-import com.google.api.services.vision.v1.model.TextAnnotation;
 
 
 import com.hackthon.jejuhackathon.R;
 import com.hackthon.jejuhackathon.src.BaseActivity;
-import com.hackthon.jejuhackathon.src.Map2Activity;
+import com.hackthon.jejuhackathon.src.map.Map2Activity;
 import com.hackthon.jejuhackathon.src.main.MainActivity;
-import com.hackthon.jejuhackathon.src.ride.RideActivity;
 import com.hackthon.jejuhackathon.src.utils.PackageManagerUtils;
 
 
-import org.json.JSONException;
-
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.lang.ref.WeakReference;
-import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import okio.ByteString;
 
 
 public class HelmetActivity extends BaseActivity {

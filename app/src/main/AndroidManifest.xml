@@ -20,12 +20,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".src.ride.RideActivity"></activity>
-        <activity android:name=".src.Map2Activity"></activity>
+        <activity android:name=".src.signup.SignUpActivity"></activity>
+        <!--        <activity android:name=".src.ride.RideActivity">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDgP0N1hW-lUGnFepCF50-UsTZlwkjUorQ" />
+
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
+        <activity android:name=".src.map.Map2Activity" />
+
         <activity android:name=".src.InsuActivity" />
         <activity android:name=".src.VideoActivity" />
         <activity
@@ -59,7 +64,24 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
+        <activity android:name=".src.ride.Ride">
 
+
+        </activity>
+
+        <activity android:name=".src.camera.CameraActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="ai.fritz.core.FritzCustomModelService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.hackthon.jejuhackathon.provider"
