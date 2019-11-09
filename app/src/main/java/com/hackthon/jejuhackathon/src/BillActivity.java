@@ -141,6 +141,7 @@ public class BillActivity extends BaseActivity {
         Log.d("클레이", credentials.getAddress());
 //        Log.d("클레이", credentials.get());
 
+
         new Thread() {
             public void run() {
                 try {

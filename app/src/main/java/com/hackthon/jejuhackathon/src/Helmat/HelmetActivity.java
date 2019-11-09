@@ -373,7 +373,8 @@ public class HelmetActivity extends BaseActivity {
             showCustomToast(result);
             hideProgressDialog();
             if(result.contains("Helmet")){
-
+                Intent intent = new Intent(mContext, DetectorActivity.class);
+                startActivity(intent);
             }
             else{
                 HelmetCheckCustomDialog helmetCheckCustomDialog = new HelmetCheckCustomDialog(mContext, new HelmetCheckCustomDialog.DeleteDialogListener() {

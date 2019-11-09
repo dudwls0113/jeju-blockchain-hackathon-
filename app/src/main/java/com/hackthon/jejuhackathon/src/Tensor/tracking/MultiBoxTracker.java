@@ -24,6 +24,7 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
@@ -39,10 +40,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import static com.hackthon.jejuhackathon.src.Tensor.DetectorActivity.vibrate;
+
 /**
  * A tracker that handles non-max suppression and matches existing objects to new detections.
  */
 public class MultiBoxTracker {
+
+    private Vibrator vibrator;
+
+
+
     private static final float TEXT_SIZE_DIP = 18;
     private static final float MIN_SIZE = 16.0f;
     private static final int[] COLORS = {
@@ -159,8 +167,8 @@ public class MultiBoxTracker {
             if (recognition.title.equals("person") && 100 * recognition.detectionConfidence > 60) {
                 borderedText.drawText(
                         canvas, trackedPos.left + cornerSize, trackedPos.top, labelString + "%", boxPaint);
-
-//                Log.d("SSSEEE", "ddddd");
+                vibrate();
+                //                Log.d("SSSEEE", "ddddd");
 
             }
         }

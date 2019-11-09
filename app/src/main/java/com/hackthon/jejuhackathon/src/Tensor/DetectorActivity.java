@@ -30,14 +30,18 @@ import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.location.Location;
+import android.media.AudioManager;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.media.ToneGenerator;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.os.Vibrator;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -108,8 +112,12 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     private BorderedText borderedText;
 
+    public static Vibrator vibrator;
+    static ToneGenerator tone;
+
     //////////////////////////////////////////
 
+    LinearLayout linearLayoutTmap;
     TMapView mTmapView;
     private Context mContext;
     private boolean mTrackingMode = true;
@@ -118,9 +126,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     CoordinatorLayout mConstraintLayoutCamera;
 
 
-    boolean isRecMode = false;
+    boolean isRecMode = true;
 
     TextView mTextViewRec;
+    ImageView mImageViewEndRide;
     ////////////////////////////////////////
 
     @Override
@@ -309,26 +318,34 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         super.onCreate(savedInstanceState);
 //    setContentView(R.layout.activity_map2);
         mTextViewRec = findViewById(R.id.recBtn);
-
+        mImageViewEndRide = findViewById(R.id.finishRidingBtn);
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        tone = new ToneGenerator(AudioManager.STREAM_MUSIC, ToneGenerator.MAX_VOLUME);
         mTextViewRec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isRecMode) {
-                    mConstraintLayoutCamera.setVisibility(View.INVISIBLE);
-                    mTmapView.setVisibility(View.VISIBLE);
+//                    mConstraintLayoutCamera.set(View.INVISIBLE);
+//                    mTmapView.setVisibility(View.VISIBLE);
+                    linearLayoutTmap.bringToFront();
+                    mTextViewRec.bringToFront();
+                    mImageViewEndRide.bringToFront();
                     isRecMode = false;
                     Log.d("클릭", "ㅇㅇ");
                 } else {
-                    mConstraintLayoutCamera.setVisibility(View.VISIBLE);
-                    mTmapView.setVisibility(View.INVISIBLE);
+//                    mConstraintLayoutCamera.setVisibility(View.VISIBLE);
+//                    mTmapView.setVisibility(View.INVISIBLE);
+                    mConstraintLayoutCamera.bringToFront();
+                    mTextViewRec.bringToFront();
+                    mImageViewEndRide.bringToFront();
+                    Log.d("클릭", "gg");
                     isRecMode = true;
-                    Log.d("클릭", "ddd");
                 }
             }
         });
         mContext = this;
         mConstraintLayoutCamera = findViewById(R.id.camera_layout);
-        LinearLayout linearLayoutTmap = findViewById(R.id.linearLayoutTmap);
+        linearLayoutTmap = findViewById(R.id.linearLayoutTmap);
         mTmapView = new TMapView(this);
 
         mTmapView.setSKTMapApiKey("220db9a1-476e-4e2e-8691-794c9b0cd38e");
@@ -457,5 +474,12 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         if (mTrackingMode) {
             mTmapView.setLocationPoint(location.getLongitude(), location.getLatitude());
         }
+    }
+
+    public static void vibrate(){
+        vibrator.vibrate(400); // 1초간 진동
+        tone.startTone(ToneGenerator.TONE_DTMF_S, 400);
+
+//        ringtone.play();
     }
 }

@@ -21,12 +21,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <LinearLayout
+        android:id="@+id/linearLayoutTmap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_anchor="@+id/relativeLayout"
+        app:layout_anchorGravity="center">
+
+
+    </LinearLayout>
+
+
+
+
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/camera_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#00000000"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
@@ -66,33 +83,6 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayoutTmap"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="visible"
-        app:layout_anchor="@+id/relativeLayout"
-        app:layout_anchorGravity="center">
-
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/recBtn"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_gravity="right"
-        android:layout_marginTop="60dp"
-        android:layout_marginRight="17dp"
-        android:background="@drawable/bg_circle_yellow"
-        android:gravity="center"
-        android:onClick="customOnClick"
-        android:text="REC"
-        android:textColor="@color/colorWhite"
-        android:textSize="15sp"
-        android:textStyle="bold" />
-
     <ImageView
         android:id="@+id/finishRidingBtn"
         android:layout_width="wrap_content"
@@ -110,6 +100,19 @@
         android:layout_marginLeft="21dp"
         android:layout_marginTop="56dp"
         app:srcCompat="@drawable/ic_ment_klay" />
-
+    <TextView
+        android:id="@+id/recBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="17dp"
+        android:background="@drawable/bg_circle_yellow"
+        android:gravity="center"
+        android:onClick="customOnClick"
+        android:text="REC"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
 </FrameLayout>

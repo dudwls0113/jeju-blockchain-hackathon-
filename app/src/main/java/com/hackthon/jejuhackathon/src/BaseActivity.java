@@ -3,10 +3,14 @@ package com.hackthon.jejuhackathon.src;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.os.Vibrator;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialog;
 
@@ -20,6 +24,12 @@ public class BaseActivity extends AppCompatActivity {
 
     public void showCustomToast(final String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     public void showProgressDialog(Activity activity) {
@@ -53,6 +63,8 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     static public boolean isHelmet = true;
+
+
 
     @Override
     public void onStop() {
