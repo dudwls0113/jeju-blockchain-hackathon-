@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: ai.fritz:custom-model-tensorflow-lite:4.1.0@aar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/217c9c140b5597b3b92c6f93d73c8030/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/217c9c140b5597b3b92c6f93d73c8030/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

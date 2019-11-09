@@ -1,7 +1,4 @@
-package com.hackthon.jejuhackathon.src.ride;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.hackthon.jejuhackathon.src.camera;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -11,15 +8,13 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.util.Log;
 
-import com.google.firebase.ml.vision.common.FirebaseVisionImage;
-import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.hackthon.jejuhackathon.R;
 import com.otaliastudios.cameraview.CameraView;
 import com.otaliastudios.cameraview.frame.Frame;
 import com.otaliastudios.cameraview.frame.FrameProcessor;
-
-
-import java.util.List;
 
 import ai.fritz.core.Fritz;
 import ai.fritz.core.FritzManagedModel;
@@ -27,13 +22,12 @@ import ai.fritz.core.FritzOnDeviceModel;
 import ai.fritz.objectdetectionmodelfast.ObjectDetectionOnDeviceModel;
 import ai.fritz.vision.FritzVision;
 import ai.fritz.vision.FritzVisionImage;
-import ai.fritz.vision.FritzVisionObject;
 import ai.fritz.vision.PredictorStatusListener;
 import ai.fritz.vision.objectdetection.FritzVisionObjectPredictor;
 import ai.fritz.vision.objectdetection.FritzVisionObjectResult;
 import ai.fritz.vision.objectdetection.ObjectDetectionManagedModel;
 
-public class RideActivity extends AppCompatActivity {
+public class CameraActivity extends AppCompatActivity {
 
 
     RenderScript renderScript;
@@ -46,22 +40,16 @@ public class RideActivity extends AppCompatActivity {
     FritzVisionImage fritzVisionImage;
     FritzOnDeviceModel onDeviceModel;
     FritzVisionObjectPredictor objectPredictor;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ride);
+        setContentView(R.layout.activity_camera);
+        Fritz.configure(this, "d6a754dde5c3471eb289ca96dcdecce4");
+
         cameraView = findViewById(R.id.cameraView);
 
         cameraView.setLifecycleOwner(this); //Automatically handles the camera lifecycle
-
-//        Fritz.configure(this, "d6a754dde5c3471eb289ca96dcdecce4");
-//        init();
-//
-//        ObjectDetectionOnDeviceModel = new onDeviceModel = new ObjectDetectionOnDeviceModel();
-//        val objectPredictor = FritzVision.ObjectDetection.getPredictor(onDeviceModel);
-//        var fritzVisionImage: FritzVisionImage
-//        init();
+        init();
     }
 
     void init() {
@@ -78,8 +66,9 @@ public class RideActivity extends AppCompatActivity {
 //        List<FritzVisionObject> visionObjects = objectResult.get();
 
 //        FritzOnDeviceModel onDeviceModel = new ObjectDetectionOnDeviceModel();
-        objectPredictor = FritzVision.ObjectDetection.getPredictor(onDeviceModel);
         onDeviceModel = new ObjectDetectionOnDeviceModel();
+        objectPredictor = FritzVision.ObjectDetection.getPredictor(onDeviceModel);
+
 
 
         FritzManagedModel managedModel = new ObjectDetectionManagedModel();
@@ -98,14 +87,18 @@ public class RideActivity extends AppCompatActivity {
                                                  //Run this only once
                                                  initializeData();
                                              }
+                                             Log.d("아아", frame.getData()+"");
 
                                              allocationIn.copyFrom(frame.getData());
                                              yuvToRGB.forEach(allocationOut);
                                              allocationOut.copyTo(bitmapOut);
                                              fritzVisionImage = FritzVisionImage.fromBitmap(bitmapOut);
                                              FritzVisionObjectResult objectResult = objectPredictor.predict(fritzVisionImage);
+
+                                             Log.d("아아", frame.getData()+"");
+
                                              for(int i=0; i< objectResult.getVisionObjectsByClass("person").size(); i++){
-                                                 Log.d("결과", objectResult.getVisionObjectsByClass("person").get(i).getVisionLabel()+"");
+                                                 Log.d("아아", objectResult.getObjects().get(i).getVisionLabel()+"");
                                              }
                                          }
                                      }
@@ -123,21 +116,4 @@ public class RideActivity extends AppCompatActivity {
 
     }
 
-
-    private FirebaseVisionImage getVisionImageFromFrame(Frame frame) {
-        byte[] data = frame.getData();
-        FirebaseVisionImageMetadata imageMetaData = new FirebaseVisionImageMetadata.Builder()
-                .setFormat(FirebaseVisionImageMetadata.IMAGE_FORMAT_NV21)
-                .setRotation(frame.getRotation())
-                .setHeight(frame.getSize().getHeight())
-                .setWidth(frame.getSize().getWidth())
-                .build();
-
-        FirebaseVisionImage image = FirebaseVisionImage.fromByteArray(data, imageMetaData);
-        return image;
-    }
-
-
 }
-
-

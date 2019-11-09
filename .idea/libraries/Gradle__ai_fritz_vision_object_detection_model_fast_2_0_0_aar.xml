@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: ai.fritz:vision-object-detection-model-fast:2.0.0@aar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/e0ab9e48b298e11d3bcfa2738f1b446e/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/e0ab9e48b298e11d3bcfa2738f1b446e/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
