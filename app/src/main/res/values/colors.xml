@@ -31,4 +31,7 @@
 
 <!--    회원가입 글씨 색 -->
     <color name="signUpTextGrey">#9f9f9f</color>
+    <color name="signUpBottomBorder">#efefef</color>
+<!--    로그인 글씨 색 -->
+    <color name="logInTextGrey">#b8b8b8</color>
 </resources>
