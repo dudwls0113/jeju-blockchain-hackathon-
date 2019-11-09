@@ -5,14 +5,19 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.hackthon.jejuhackathon.R;
+import com.hackthon.jejuhackathon.src.Helmat.HelmetActivity;
+import com.hackthon.jejuhackathon.src.Tensor.DetectorActivity;
+import com.hackthon.jejuhackathon.src.main.MainActivity;
 import com.skt.Tmap.TMapGpsManager;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapPolygon;
@@ -25,6 +30,8 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
     private Context mContext;
     private boolean mTrackingMode = true;
     private TMapGpsManager mTmapGps=null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,8 +149,27 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
         mTmapView.addTMapPolygon("Line4", tMapPolygon4);
 
 //        mTmapView.setCenterPoint(126.985302, 37.570841);
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+//        overridePendingTransition(R.anim.not_move_activity,R.anim.not_move_activity);
 
+    }
+
+    public void customOnClick(View view) {
+        switch (view.getId()) {
+            case R.id.recBtn:
+//                Intent intent = new Intent(mContext, DetectorActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.not_move_activity,R.anim.not_move_activity);
+
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
