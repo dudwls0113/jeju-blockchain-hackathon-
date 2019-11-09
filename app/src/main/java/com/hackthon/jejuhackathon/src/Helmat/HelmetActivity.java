@@ -60,6 +60,7 @@ import com.google.api.services.vision.v1.model.ImageContext;
 
 import com.hackthon.jejuhackathon.R;
 import com.hackthon.jejuhackathon.src.BaseActivity;
+import com.hackthon.jejuhackathon.src.BillActivity;
 import com.hackthon.jejuhackathon.src.Tensor.DetectorActivity;
 import com.hackthon.jejuhackathon.src.map.Map2Activity;
 import com.hackthon.jejuhackathon.src.main.MainActivity;
@@ -369,7 +370,6 @@ public class HelmetActivity extends BaseActivity {
         }
 
         protected void onPostExecute(String result) {
-            Log.d("result", result);
             showCustomToast(result);
             hideProgressDialog();
             if(result.contains("Helmet")){
@@ -384,7 +384,6 @@ public class HelmetActivity extends BaseActivity {
 
                     @Override
                     public void clickNoBtn() {
-                        showCustomToast("Dddd");
                         Intent intent = new Intent(mContext, DetectorActivity.class);
                         startActivity(intent);
                     }

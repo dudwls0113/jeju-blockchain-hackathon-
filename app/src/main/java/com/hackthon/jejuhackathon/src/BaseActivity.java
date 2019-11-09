@@ -52,6 +52,8 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    static public boolean isHelmet = true;
+
     @Override
     public void onStop() {
         super.onStop();

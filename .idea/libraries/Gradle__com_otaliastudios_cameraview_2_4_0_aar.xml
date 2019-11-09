@@ -7,7 +7,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/23ffed83f6e7724ac67d4c0ed83c46d2/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/23ffed83f6e7724ac67d4c0ed83c46d2/res" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.otaliastudios/cameraview/2.4.0/6d727d0c3c24a602b10884e0ed67e42d5eb20183/cameraview-2.4.0-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.otaliastudios/cameraview/2.4.0/94af510950807802ad00ac6ee1f0ea57c8bd0982/cameraview-2.4.0-sources.jar!/" />
     </SOURCES>

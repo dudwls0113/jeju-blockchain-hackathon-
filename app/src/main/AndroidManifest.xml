@@ -29,6 +29,10 @@
         </activity>
         <activity android:name=".src.signup.SignUpActivity" /> <!-- <activity android:name=".src.ride.RideActivity"> -->
         <!-- <intent-filter> -->
+        <activity android:name=".src.BillActivity"></activity>
+        <activity android:name=".src.signup.GuessActivity" />
+        <activity android:name=".src.login.LogInActivity" />
+        <activity android:name=".src.ride.RideActivity" />
         <!-- <action android:name="android.intent.action.MAIN" /> -->
         <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
         <!-- </intent-filter> -->
@@ -37,35 +41,29 @@
 
         </activity>
 
-        <activity android:name=".src.login.LogInActivity" />
-        <activity android:name=".src.ride.RideActivity" />
         <activity android:name=".src.InsuActivity" />
         <activity android:name=".src.VideoActivity" />
         <activity
             android:name=".src.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
+                        <intent-filter>
+                            <action android:name="android.intent.action.MAIN" />
 
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
+                            <category android:name="android.intent.category.LAUNCHER" />
+                        </intent-filter>
+
         </activity>
         <activity android:name=".src.main.MainActivity" />
         <activity android:name=".src.Helmat.HelmetActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
         <activity android:name=".src.Helmat.TestActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".src.camera.CameraActivity">
             <!--            <intent-filter>-->
@@ -78,7 +76,6 @@
         <activity
             android:name=".src.Tensor.DetectorActivity"
             android:screenOrientation="portrait">
-
         </activity>
 
         <service

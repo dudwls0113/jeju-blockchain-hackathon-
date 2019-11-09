@@ -36,4 +36,8 @@
     <color name="logInTextGrey">#b8b8b8</color>
     <color name="semi_transparent">#66000000</color>
 
+<!--    영수증 상단 레이아웃 색 -->
+    <color name="billTopLayout">#d8d8d8</color>
+    <color name="billBottomGrey">#d2d2d2</color>
+    <color name="billTextGrey">#C2C2C2</color>
 </resources>

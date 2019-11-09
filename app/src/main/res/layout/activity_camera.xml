@@ -94,6 +94,15 @@
         android:textStyle="bold" />
 
     <ImageView
+        android:id="@+id/finishRidingBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="38dp"
+        android:onClick="customOnClick"
+        app:srcCompat="@drawable/ic_finish_riding" />
+
+    <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -46,40 +46,29 @@ public class MainActivity extends BaseActivity {
         mPremiumInsuRadio = findViewById(R.id.premiumInsuRadio);
 
         mBtnGoToRide = findViewById(R.id.btnGoToRide);
-        mBtnGoToRide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 if (mInsuType == 100) {
-                    showCustomToast("보험 여부 선택해주세요");
-                } else {
-                    Intent intent = new Intent(MainActivity.this, HelmetActivity.class);
-                    intent.putExtra("insuType", mInsuType);
-                    startActivity(intent);
-                }
+        mBtnGoToRide.setOnClickListener(v -> {
+             if (mInsuType == 100) {
+                showCustomToast("보험 여부 선택해주세요");
+            } else {
+                Intent intent = new Intent(MainActivity.this, HelmetActivity.class);
+                intent.putExtra("insuType", mInsuType);
+                startActivity(intent);
             }
         });
 
         mMenuHamburger = findViewById(R.id.menuHamburger);
-        mMenuHamburger.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isHamburgerOpen) {
-                    mDrawerLayout.closeDrawers();
-                    isHamburgerOpen = false;
-                } else {
-                    mDrawerLayout.openDrawer(mDrawerView);
-                    isHamburgerOpen = true;
-                }
+        mMenuHamburger.setOnClickListener(v -> {
+            if (isHamburgerOpen) {
+                mDrawerLayout.closeDrawers();
+                isHamburgerOpen = false;
+            } else {
+                mDrawerLayout.openDrawer(mDrawerView);
+                isHamburgerOpen = true;
             }
         });
 
         mDrawerLayout.addDrawerListener(listener);
-        mDrawerView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
+        mDrawerView.setOnTouchListener((v, event) -> true);
 
     }
 
@@ -108,12 +97,14 @@ public class MainActivity extends BaseActivity {
     public void onClickBtn(View view) {
         switch (view.getId()) {
             case R.id.videoBtnLayout:
-                Intent intent = new Intent(this, VideoActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(this, VideoActivity.class);
+//                startActivity(intent);
+                showCustomToast("준비중입니다.");
                 break;
             case R.id.insuBtnLayout:
-                Intent intent1 = new Intent(this, InsuActivity.class);
-                startActivity(intent1);
+//                Intent intent1 = new Intent(this, InsuActivity.class);
+//                startActivity(intent1);
+                showCustomToast("준비중입니다.");
                 break;
         }
     }

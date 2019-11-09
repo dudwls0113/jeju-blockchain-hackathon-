@@ -25,7 +25,6 @@
         android:gravity="center"
         android:text="REC"
         android:textColor="@color/colorWhite"
-        android:onClick="customOnClick"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -39,5 +38,22 @@
         app:srcCompat="@drawable/ic_ment_klay" />
 
 
+    <ImageView
+        android:id="@+id/finishRidingBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="38dp"
+        android:onClick="customOnClick"
+        app:srcCompat="@drawable/ic_finish_riding" />
+
+    <ImageView
+        android:id="@+id/slowlyAlertImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="193dp"
+        app:srcCompat="@drawable/ic_go_slowly"
+        tools:visibility="invisible" />
 
 </FrameLayout>
