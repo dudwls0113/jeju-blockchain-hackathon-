@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -36,7 +37,6 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
     private Context mContext;
     private boolean mTrackingMode = true;
     private TMapGpsManager mTmapGps = null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,16 +74,6 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
 
         mTmapView.setTrackingMode(true);
         mTmapView.setSightVisible(true);
-//        TMapPoint tMapPoint = new TMapPoint(37.570841, 126.985302);
-//
-//        TMapCircle tMapCircle = new TMapCircle();
-//        tMapCircle.setCenterPoint( tMapPoint );
-//        tMapCircle.setRadius(300);
-//        tMapCircle.setCircleWidth(2);
-//        tMapCircle.setLineColor(Color.BLUE);
-//        tMapCircle.setAreaColor(Color.GRAY);
-//        tMapCircle.setAreaAlpha(100);
-//        tMapView.addTMapCircle("circle1", tMapCircle);
 
         ArrayList<TMapPoint> alTMapPoint = new ArrayList<TMapPoint>();
         alTMapPoint.add(new TMapPoint(33.514578, 126.529531));
@@ -159,6 +149,12 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
     public void onClickBtn(View view) {
         switch (view.getId()) {
             case R.id.finishRidingBtn:
+                SharedPreferences sp = getSharedPreferences("klay", MODE_PRIVATE);
+                int klay = sp.getInt("klay", 0);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putInt("klay", (klay+5));
+                editor.commit();
+
                 Intent intent = new Intent(Map2Activity.this, BillActivity.class);
                 startActivity(intent);
                 break;
