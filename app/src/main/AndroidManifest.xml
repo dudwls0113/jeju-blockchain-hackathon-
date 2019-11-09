@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".src.login.LogInActivity"></activity>
+        <activity android:name=".src.signup.GuessActivity"></activity>
+        <activity android:name=".src.login.LogInActivity" />
         <activity android:name=".src.signup.SignUpActivity" />
         <activity android:name=".src.ride.RideActivity" />
         <activity android:name=".src.map.Map2Activity" />

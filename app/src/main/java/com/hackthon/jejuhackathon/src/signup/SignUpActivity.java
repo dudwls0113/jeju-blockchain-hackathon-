@@ -27,6 +27,13 @@ public class SignUpActivity extends BaseActivity {
         mNameEdit = findViewById(R.id.nameEditTextSignUp);
         mKlaytnIdEdit = findViewById(R.id.klaytnIdEditText);
 
+        TextView guessBtnKlaytn = findViewById(R.id.guessBtn);
+
+        guessBtnKlaytn.setOnClickListener(v -> {
+            Intent intent = new Intent(SignUpActivity.this, GuessActivity.class);
+            startActivity(intent);
+        });
+
         mSignUpBtn = findViewById(R.id.signUpBtn);
 
         mSignUpBtn.setOnClickListener(v -> {
