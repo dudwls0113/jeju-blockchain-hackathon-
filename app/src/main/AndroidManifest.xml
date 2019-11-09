@@ -20,14 +20,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".src.signup.GuessActivity"></activity>
+        <activity android:name=".src.BillActivity"></activity>
+        <activity android:name=".src.signup.GuessActivity" />
         <activity android:name=".src.login.LogInActivity" />
         <activity android:name=".src.signup.SignUpActivity" />
         <activity android:name=".src.ride.RideActivity" />
-        <activity android:name=".src.Klaytn.KlaytnActivity">
-
-        </activity>
-        <!-- <intent-filter> -->
+        <activity android:name=".src.Klaytn.KlaytnActivity" /> <!-- <intent-filter> -->
         <!-- <action android:name="android.intent.action.MAIN" /> -->
         <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
         <!-- </intent-filter> -->
@@ -66,13 +64,15 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".src.ride.Ride"></activity>
+        <activity android:name=".src.ride.Ride" />
         <activity android:name=".src.camera.CameraActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <service

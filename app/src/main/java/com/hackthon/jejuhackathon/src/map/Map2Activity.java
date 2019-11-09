@@ -5,14 +5,18 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.hackthon.jejuhackathon.R;
+import com.hackthon.jejuhackathon.src.BillActivity;
 import com.skt.Tmap.TMapGpsManager;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapPolygon;
@@ -142,8 +146,21 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
         mTmapView.addTMapPolygon("Line4", tMapPolygon4);
 
 //        mTmapView.setCenterPoint(126.985302, 37.570841);
+        ImageView slowlyImage = findViewById(R.id.slowlyAlertImage);
+        slowlyImage.setVisibility(View.INVISIBLE);
+        boolean tf = true;
+        if(!tf){
+            slowlyImage.setVisibility(View.VISIBLE);
+        }
 
+    }
 
+    public void onClickBtn(View view){
+        switch (view.getId()){
+            case R.id.finishRidingBtn:
+                Intent intent = new Intent(Map2Activity.this, BillActivity.class);
+                startActivity(intent);
+        }
     }
 
     @Override
@@ -152,4 +169,5 @@ public class Map2Activity extends AppCompatActivity implements TMapGpsManager.on
             mTmapView.setLocationPoint(location.getLongitude(), location.getLatitude());
         }
     }
+
 }

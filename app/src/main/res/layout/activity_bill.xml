@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    tools:context=".src.BillActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/billTopLayout">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11.6dp"
+            android:layout_marginTop="12.5dp"
+            android:layout_marginBottom="12.5dp"
+            app:srcCompat="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="라이드 영수증"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="27dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/border_bottom_grey_bill"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/billDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2019. 11. 6"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/border_bottom_grey_bill"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="이용 요금"
+                android:textColor="@color/billTextGrey" />
+
+            <TextView
+                android:id="@+id/billRideMoneyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1,920원"
+                android:textColor="@color/billTextGrey" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/border_bottom_grey_bill"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="보험 요금"
+                android:textColor="@color/billTextGrey" />
+
+            <TextView
+                android:id="@+id/billInsuText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1,920원"
+                android:textColor="@color/billTextGrey" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/border_bottom_grey_bill"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="보험 할인 요금"
+                android:textColor="@color/billTextGrey" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginBottom="6dp"
+                        android:text="보유 클레이 "
+                        android:textColor="@color/billTextGrey"
+                        android:textSize="8sp" />
+
+                    <TextView
+                        android:id="@+id/billMyKlay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="150 KLAY "
+                        android:textColor="@color/billTextGrey"
+                        android:textSize="8sp" />
+
+                    <TextView
+                        android:id="@+id/billNewKlay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(+20KLAY)"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="8sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/billKlayEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_rectangle_grey"
+                        android:ems="4"
+                        android:gravity="center"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/billTextGrey"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/textView27"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_weight="1"
+                        android:text="KLAY / "
+                        android:textColor="@color/billTextGrey" />
+
+                    <TextView
+                        android:id="@+id/billSaleText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1,920원"
+                        android:textColor="@color/billTextGrey" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="27dp"
+            android:background="@drawable/border_bottom_grey_bill"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="합계"
+                android:textColor="@color/billTextGrey" />
+
+            <TextView
+                android:id="@+id/billSumText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1,920원"
+                android:textColor="@color/billTextGrey" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/payBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="38dp"
+                android:onClick="onClick"
+                app:srcCompat="@drawable/ic_go_to_pay" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

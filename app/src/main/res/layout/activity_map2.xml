@@ -37,4 +37,22 @@
         android:layout_marginTop="56dp"
         app:srcCompat="@drawable/ic_ment_klay" />
 
+    <ImageView
+        android:id="@+id/finishRidingBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="38dp"
+        android:onClick="onClickBtn"
+        app:srcCompat="@drawable/ic_finish_riding" />
+
+    <ImageView
+        android:id="@+id/slowlyAlertImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="193dp"
+        app:srcCompat="@drawable/ic_go_slowly"
+        tools:visibility="invisible" />
+
 </FrameLayout>

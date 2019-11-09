@@ -202,7 +202,7 @@
             android:layout_marginBottom="30dp"
             android:background="@drawable/border_round_back_yellow"
             android:paddingLeft="67dp"
-            android:paddingTop="6dp"
+            android:paddingTop="7dp"
             android:paddingRight="67dp"
             android:paddingBottom="7dp"
             android:text="sign-up"
