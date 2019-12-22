@@ -24,7 +24,7 @@
     <color name="colorFemaleRed">#fe6c6d</color>
 
     <color name="colorGray">#b6b6b6</color>
-    <color name="colorBlackTextBold">#4a4a4a</color>
+    <color name="colorBlackTextBold">#4A4A4A</color>
 
 <!--   티맵 폴리건 색 -->
     <color name="mapTransYellow">#80f7b500</color>
@@ -39,5 +39,5 @@
 <!--    영수증 상단 레이아웃 색 -->
     <color name="billTopLayout">#d8d8d8</color>
     <color name="billBottomGrey">#d2d2d2</color>
-    <color name="billTextGrey">#C2C2C2</color>
+    <color name="billTextGrey">#000000</color>
 </resources>

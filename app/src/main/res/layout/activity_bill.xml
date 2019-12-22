@@ -157,16 +157,7 @@
                         android:id="@+id/billMyKlay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="150 "
-                        android:textColor="@color/billTextGrey"
-                        android:textSize="8sp" />
-
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="KLAY "
+                        android:text="150 KLAY "
                         android:textColor="@color/billTextGrey"
                         android:textSize="8sp" />
 
@@ -174,7 +165,7 @@
                         android:id="@+id/billNewKlay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(+5KLAY)"
+                        android:text="(+20KLAY)"
                         android:textColor="@color/colorPrimary"
                         android:textSize="8sp" />
                 </LinearLayout>
@@ -209,7 +200,7 @@
                         android:id="@+id/billSaleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0원"
+                        android:text="1,920원"
                         android:textColor="@color/billTextGrey" />
                 </LinearLayout>
             </LinearLayout>

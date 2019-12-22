@@ -34,21 +34,24 @@ public class LogInActivity extends BaseActivity {
         });
 
         mLogInBtn.setOnClickListener(v -> {
-            sp = getSharedPreferences("user", MODE_PRIVATE);
-            String userId = sp.getString("userId", "");
-            String userPw = sp.getString("userPw", "");
-
-            if (mIdEdit.getText().toString().equals("") || mIdEdit.getText().toString().equals(null) || mPwEdit.getText().toString().equals("") || mPwEdit.getText().toString().equals(null)) {
-                showCustomToast("아이디와 비밀번호를 입력해주세요!");
-            } else if (userId.equals(mIdEdit.getText().toString()) && userPw.equals(mPwEdit.getText().toString())) {
-                Intent intent = new Intent(LogInActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            } else {
-                showCustomToast("알맞은 아이디와 비밀번호를 입력해주세요!");
-            }
-
+//            sp = getSharedPreferences("user", MODE_PRIVATE);
+//            String userId = sp.getString("userId", "");
+//            String userPw = sp.getString("userPw", "");
+//
+//            if (mIdEdit.getText().toString().equals("") || mIdEdit.getText().toString().equals(null) || mPwEdit.getText().toString().equals("") || mPwEdit.getText().toString().equals(null)) {
+//                showCustomToast("아이디와 비밀번호를 입력해주세요!");
+//            } else if (userId.equals(mIdEdit.getText().toString()) && userPw.equals(mPwEdit.getText().toString())) {
+//                Intent intent = new Intent(LogInActivity.this, MainActivity.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
+//            } else {
+//                showCustomToast("알맞은 아이디와 비밀번호를 입력해주세요!");
+//            }
+            Intent intent = new Intent(LogInActivity.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         });
     }
 }

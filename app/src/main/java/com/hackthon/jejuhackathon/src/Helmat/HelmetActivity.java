@@ -370,23 +370,25 @@ public class HelmetActivity extends BaseActivity {
         }
 
         protected void onPostExecute(String result) {
-            showCustomToast(result);
+//            showCustomToast(result);
+                            Log.d("클릭", result);
+
             hideProgressDialog();
             if(result.contains("Helmet")){
+//                Log.d("클릭", "");
                 Intent intent = new Intent(mContext, DetectorActivity.class);
                 startActivity(intent);
             }
             else{
                 HelmetCheckCustomDialog helmetCheckCustomDialog = new HelmetCheckCustomDialog(mContext, new HelmetCheckCustomDialog.DeleteDialogListener() {
                     @Override
-                    public void clickYesBtn() {
+                    public void clickReTryBtn() {
 
                     }
 
                     @Override
-                    public void clickNoBtn() {
-                        Intent intent = new Intent(mContext, DetectorActivity.class);
-                        startActivity(intent);
+                    public void clickSkipBtn() {
+
                     }
                 });
                 helmetCheckCustomDialog.show();

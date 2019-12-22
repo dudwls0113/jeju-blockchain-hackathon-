@@ -31,7 +31,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/dialog_delete_btn_yes"
+        android:id="@+id/dialog_delete_btn_retry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -47,7 +47,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/dialog_delete_btn_no"
+        android:id="@+id/dialog_delete_btn_skip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"

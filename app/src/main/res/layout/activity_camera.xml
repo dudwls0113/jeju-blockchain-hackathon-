@@ -22,22 +22,6 @@
     android:layout_height="match_parent">
 
 
-    <LinearLayout
-        android:id="@+id/linearLayoutTmap"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="visible"
-        app:layout_anchor="@+id/relativeLayout"
-        app:layout_anchorGravity="center">
-
-
-    </LinearLayout>
-
-
-
-
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/camera_layout"
         android:layout_width="match_parent"
@@ -83,6 +67,18 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayoutTmap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_anchor="@+id/relativeLayout"
+        app:layout_anchorGravity="center">
+
+
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/finishRidingBtn"
         android:layout_width="wrap_content"
@@ -100,6 +96,7 @@
         android:layout_marginLeft="21dp"
         android:layout_marginTop="56dp"
         app:srcCompat="@drawable/ic_ment_klay" />
+
     <TextView
         android:id="@+id/recBtn"
         android:layout_width="32dp"

@@ -2,8 +2,10 @@ package com.hackthon.jejuhackathon.src.Helmat;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -11,12 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hackthon.jejuhackathon.R;
+import com.hackthon.jejuhackathon.src.Tensor.DetectorActivity;
 
 
 public class HelmetCheckCustomDialog extends Dialog {
 
     ImageView mImageViewClose;
-    Button mBtnYes, mBtnNo;
+    Button mBtnReTry, mBtnSkip;
     Context mContext;
     TextView mTextViewTitle;
 
@@ -31,24 +34,30 @@ public class HelmetCheckCustomDialog extends Dialog {
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));  //다이얼로그의 배경을 투명으로 만듭니다.
         setContentView(R.layout.custom_helmet_check);     //다이얼로그에서 사용할 레이아웃입니다.
 
-        mBtnYes = findViewById(R.id.dialog_delete_btn_yes);
-        mBtnNo = findViewById(R.id.dialog_delete_btn_no);
+        mBtnReTry = findViewById(R.id.dialog_delete_btn_retry);
+        mBtnSkip = findViewById(R.id.dialog_delete_btn_skip);
 //        mTextViewTitle = findViewById(R.id.dialog_delete_tv_title);
 
 //        mTextViewTitle.setText(title);
 
-        mBtnNo.setOnClickListener(new View.OnClickListener() {
+        mBtnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteDialogListener.clickNoBtn();
-
-                dismiss();
+                Log.d("클릭", "aaa");
+                try {
+                    Intent intent = new Intent(mContext, DetectorActivity.class);
+                    mContext.startActivity(intent);
+                    dismiss();
+                }
+                catch (Exception e){
+                    Log.d("클릭", e.toString());
+                }
             }
         });
-        mBtnYes.setOnClickListener(new View.OnClickListener() {
+        mBtnReTry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteDialogListener.clickYesBtn();
+                deleteDialogListener.clickReTryBtn();
 
                 dismiss();
             }
@@ -64,8 +73,8 @@ public class HelmetCheckCustomDialog extends Dialog {
     }
 
     public interface DeleteDialogListener {
-        void clickYesBtn();
-        void clickNoBtn();
+        void clickReTryBtn();
+        void clickSkipBtn();
 
     }
 

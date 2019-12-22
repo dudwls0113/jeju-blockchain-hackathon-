@@ -290,12 +290,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         return DESIRED_PREVIEW_SIZE;
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.not_move_activity, R.anim.not_move_activity);
-    }
-
     // Which detection model to use: by default uses Tensorflow Object Detection API frozen
     // checkpoints.
     private enum DetectorMode {
@@ -317,6 +311,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //    setContentView(R.layout.activity_map2);
+        Log.d("클릭", "bbb");
+
+
         mTextViewRec = findViewById(R.id.recBtn);
         mImageViewEndRide = findViewById(R.id.finishRidingBtn);
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
